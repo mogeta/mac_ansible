@@ -4,11 +4,24 @@
   vars:
     homebrew_packages:
       - name: awscli
+      - name: go
+      - name: python3
+      - name: fish
+
+    homebrew_cask_packages:
+      - name: alfred
+      - name: bartender
 
   tasks:
     - name: homebrew update
       homebrew:
         update_homebrew: yes
+
+    - name: homebrew packages install
+      homebrew:
+        name: '{{ item.name }}'
+        state: '{{ item.state | default("present") }}'
+      with_items: '{{ homebrew_packages }}'
 
     - name: homebrew cask packages install
       homebrew_cask: name={{ item.name }} state=installed
@@ -16,9 +29,3 @@
       environment:
         HOMEBREW_CASK_OPTS: "--appdir=/Applications"
       with_items: '{{ homebrew_cask_packages }}'
-
-    - name: homebrew packages install
-      homebrew:
-        name: '{{ item.name }}'
-        state: '{{ item.state | default("present") }}'
-      with_items: '{{ homebrew_packages }}'
