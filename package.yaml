@@ -6,6 +6,8 @@
       - name: awscli
       - name: go
       - name: python3
+      - name: mas
+      - name: node
       - name: fish
 
     homebrew_cask_packages:
