@@ -14,6 +14,14 @@
       - name: alfred
       - name: bartender
       - name: sourcetree
+      - name: iterm2
+      - name: google-japanese-ime
+      - name: visual-studio-code
+      - name: 1password
+      - name: dropbox
+      - name: appium
+      - name: java
+      - name: android-studio
 
   tasks:
     - name: homebrew update
@@ -28,7 +36,6 @@
 
     - name: homebrew cask packages install
       homebrew_cask: name={{ item.name }} state=installed
-      # ※1 GUIツールをインストールする場所を `/Application` に固定
       environment:
         HOMEBREW_CASK_OPTS: "--appdir=/Applications"
       with_items: '{{ homebrew_cask_packages }}'
